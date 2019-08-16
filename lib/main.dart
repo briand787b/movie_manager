@@ -20,7 +20,11 @@ class MovieManagerState extends State<StatefulWidget> {
     'Pick the server to distribute to',
   ];
 
-  void _modifyMessage() {
+  void _modifyMessage(int index) {
+    if (index >= _defaultMessages.length - 1) {
+      return;
+    }
+
     setState(() {
       this._messageIndex++;
     });
@@ -36,7 +40,7 @@ class MovieManagerState extends State<StatefulWidget> {
           ),
           body: TextControl(
             message: this._defaultMessages[this._messageIndex],
-            selectionCallback: this._modifyMessage,
+            selectionCallback: () => this._modifyMessage(this._messageIndex),
           )),
     );
   }
