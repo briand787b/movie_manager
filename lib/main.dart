@@ -5,43 +5,17 @@ import './text_control.dart';
 
 main() => runApp(MovieManager());
 
-class MovieManager extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return MovieManagerState();
-  }
-}
-
-class MovieManagerState extends State<StatefulWidget> {
-  var _messageIndex = 0;
-  var _defaultMessages = [
-    'Welcome to Brian\'s Movie Manager',
-    'Pick the movie to manage',
-    'Pick the server to distribute to',
-  ];
-
-  void _modifyMessage(int index) {
-    if (index >= _defaultMessages.length - 1) {
-      return;
-    }
-
-    setState(() {
-      this._messageIndex++;
-    });
-  }
-
+class MovieManager extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) {
     return MaterialApp(
       title: 'Brian\'s Movie Manager',
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('Brian\'s Movie Manager'),
-          ),
-          body: TextControl(
-            message: this._defaultMessages[this._messageIndex],
-            selectionCallback: () => this._modifyMessage(this._messageIndex),
-          )),
+        appBar: AppBar(
+          title: Text('Brian\'s Movie Manager'),
+        ),
+        body: TextControl(),
+      ),
     );
   }
 }

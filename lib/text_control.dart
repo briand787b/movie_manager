@@ -2,22 +2,41 @@ import 'package:flutter/material.dart';
 
 import './text_block.dart';
 
-class TextControl extends StatelessWidget {
-  final String message;
-  final Function selectionCallback;
+class TextControl extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return TextControlState();
+  }
+}
 
-  TextControl({@required this.message, @required this.selectionCallback});
+class TextControlState extends State<TextControl> {
+  var _messageIndex = 0;
+  var _defaultMessages = [
+    'Welcome to Brian\'s Movie Manager',
+    'Pick the movie to manage',
+    'Pick the server to distribute to',
+  ];
+
+  void _modifyMessage(int index) {
+    if (index >= _defaultMessages.length - 1) {
+      return;
+    }
+
+    setState(() {
+      this._messageIndex++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        TextBlock(this.message),
+        TextBlock(this._defaultMessages[this._messageIndex]),
         Container(
           width: double.infinity,
           child: RaisedButton(
             child: Text('Confirm'),
-            onPressed: this.selectionCallback,
+            onPressed: () => this._modifyMessage(this._messageIndex),
             color: Colors.amber,
           ),
         ),
